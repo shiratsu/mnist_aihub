@@ -70,6 +70,17 @@ print("what is at 0 row:")
 print(mnist_dataframe[0].shape)# 一番最初の列のことらしい
 print(mnist_dataframe.loc[0].shape)# 列を行として出力
 
+# トレーニング用のデータがこちら
 training_targets, training_examples = parse_labels_and_features(mnist_dataframe[:7500])
 print(training_examples.describe())
 
+# 検証用のデータがこちら
+validation_targets, validation_examples = parse_labels_and_features(mnist_dataframe[7500:10000])
+validation_examples.describe()
+
+# show random example
+rand_example = np.random.choice(training_examples.index)
+_, ax = plt.subplots()
+ax.matshow(training_examples.loc[rand_example].values.reshape(28, 28))
+ax.set_title("Label: %i" % training_targets.loc[rand_example])
+ax.grid(False)
